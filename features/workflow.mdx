@@ -1,0 +1,229 @@
+---
+title: API Workflow
+---
+
+API Workflow is a feature in ScrapeAutomate that allows users to save, and reuse request configurations for the Scraper API. It's particularly useful for storing complex or frequently used configurations, saving time and reducing errors in repeated API calls.
+
+### Key benefits of API Workflow
+
+- By using workflows, it allows for you to easily reuse and save configurations without having to write long queries every single time
+- Extremly simplified api calls using the workflow id
+- In the future you will also be able to schedule the requests and make it run at a specific time for as long as you would like.
+
+## Dashboard Method
+
+### Create a workflow
+
+Creating a workflow is very easy, first go to the builder page and configure your request.
+
+When you are done click on the "Save as workflow" button right under the editor to create a workflow, when you click on the button It will ask you for a name for the workflow. You can set the name as anything you would like:
+
+![](/images/create-workflow.png)
+
+And finally click on submit and it should create the workflow! When you go to the workflows page you should see your workflow there!
+
+![](/images/created-workflow.png)
+
+### Using an workflow
+
+To use an api workflow you will need to get the ID of the workflow, to get the api workflow id, go to the workflow list page and you should see a column called row which has the ID of the workflow you want to run:
+
+![](/images/workflow-list-arrow.png)
+
+After copying the ID, send the workflow id as a query parameter with your api key to run the scraping request, After you run the request you should get the response:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5'
+```
+
+Keep in mind that if you are using any kind of webhook, you will get the response at the webhook rather then directly getting the response. Instead you might an response saying:
+
+```json
+{
+  "status": "ok",
+  "message": "Webhook sent successfully"
+}
+```
+
+### Edit an workflow
+
+To edit a workflow, you can go to the workflows page and click on the actions button on the workflow you want to edit, you should see a edit button there. Click on it.
+
+![](/images/workflow-edit.png)
+
+After clicking on it, you should see a builder like page which you can use to change your configuration. When you are done changing your configuration you can either create a new workflow or update the current workflow. If you want to update the current workflow, click on the "Save workflow" button under the editor, but if you want to create a new workflow click on the "Save as new workflow" button.
+
+![](/images/edit-workflow.png)
+
+Pressing on the save as new workflow button will create a new workflow with all of the additional changes and redirect you to that specific workflow.
+
+### Archiving a workflow
+
+If you want to archive/delete a workflow you can do it by going to the workflow list and clicking on the action button for the specific workflow you want to archive. Like this:
+
+After you archive a workflow you should be able to see it in the archived tab inside the workflow list.
+
+![](/images/archive-workflow.png)
+
+After you archive a workflow you will no longer be able to use that workflow, or edit that workflow. If you change your mind and want to unacrhive you go to the archived tab on your workflows list and click on the action button for the specific workflow you want to unarchive and click on the unarchive button.
+
+After clicking on the unarchive button you should be able to use that workflow again and edit it aswell.
+
+We decided to archive a workflow rather then deleting it completely from history is that so if for some reason you need it in the future you can just unarchive it.
+
+## API Method
+
+To easily manage and use the api workflows in your codebase, we provide some very simple api's which allows you to very easily do this.
+
+### Get all of your workflows
+
+To get all of a user's workflows you will need to send a `GET` request to this api route along with your api key, if your api key is invalid then the api won't return your workflows and instead return an error. Here is an example request:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/workflow?api_key=<exampleToken>'
+```
+
+You should get a response like this:
+
+```json
+[
+  {
+    "id": "cm3fecjrs0008s28cf14tavd9",
+    "userId": "cm3f9vz6k0000l5b2iemru05l",
+    "config": {
+      "url": "https://example.com/",
+      "api_key": "96e2aecc-4767-426f-8276-2fcf540463c7",
+      "render": "false"
+    },
+    "name": "Hello",
+    "lastRun": null,
+    "creditsSpent": 0,
+    "createdAt": "2024-11-13T04:44:09.880Z",
+    "updatedAt": "2024-11-13T04:44:09.880Z",
+    "archived": false
+  }
+  // Additional data...
+]
+```
+
+### Get the requests of a specific workflow
+
+To get the requests made using a specific workflow you need to get the id of the workflow you want to get the requests of, to do this you can use the [get all workflows api](#get-all-of-your-workflows) which will return you an id field for every single workflow.
+
+Using the workflow id send an GET request to the following URL with your api key and workflow id like this:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/workflow/requests/${requestId}/?api_key=<exampleToken>'
+```
+
+If everything is correct, In the response you should see an array of requests which were made using that workflow.
+
+### Creating an workflow using the api
+
+Creating an api workflow using the api is very simple, to create a workflow send an POST request to following API:
+
+```
+<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>
+```
+
+In the body you have to send an JSON object which contains the following data:
+
+```json
+{
+  "config": {}, // Scaper configuration
+  "name": "" // name of the workflow
+}
+```
+
+If everything is correct you should have a response with the created workflow. Here is an example request:
+
+```shell cURL
+curl -X POST "<EnvValue name=\"dashboardAPI\"/>/workflow/create/?api_key=<exampleApiKey>" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "name": "Test workflow",
+          "config": {
+              "url": "https://example.com",
+              "screenshot": true
+          }
+        }'
+```
+
+Response:
+
+```json
+{
+  "id": "cm4xo3ob60001v2o27d10ni8g",
+  "userId": "cm4qt32l60004tr5e4p8xxjqb",
+  "config": {
+    "url": "https://example.com",
+    "render": false,
+    "screenshot": true
+  },
+  "name": "Test workflow",
+  "lastRun": null,
+  "creditsSpent": 0,
+  "createdAt": "2024-12-21T04:16:45.523Z",
+  "updatedAt": "2024-12-21T04:16:45.523Z",
+  "archived": false
+}
+```
+
+### Archive a workflow
+
+To archive a workflow you need to set an DELETE request to the following api, with the workflow id you want to archive and your api key for authentication.
+
+```shell cURL
+curl -X DELETE "<EnvValue name="dashboardAPI"/>/workflow/archive/${workflowId}?api_key=<exampleApiKey>
+```
+
+After you send the request you will notice that your workflow has been automatically archived. Once a workflow has been archived you will no longer be able to edit or use the workflow. If you would like to revert this you may unacrhive the workflow.
+
+### Unarchive a workflow
+
+If you would like to unarchive a workflow you need to send an POST request to the following api, with the workflow id you want to unarchive and your api key.
+
+```shell cURL
+curl -X POST "<EnvValue name="dashboardAPI"/>/workflow/unarchive/${workflowId}?api_key=<exampleApiKey>"
+```
+
+Once you send an request and if everything is successful you will be able to use and edit that workflow again.
+
+### Edit a workflow
+
+If you would like to edit the name or the configuration of the workflow, its very simple. You just need to send an PATCH to the following api with the field you would like to update such as the name or the config field. No other field is editable. Here is an example:
+
+```shell cURL
+curl -X PATCH "<EnvValue name=\"dashboardAPI\"/>/workflow/edit/${workflowId}?api_key=<exampleApiKey>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "name": "Updated name",
+           "config": {
+               "url": "https://updatedurl.com",
+               "screenshot": true,
+               "render": true
+           }
+         }'
+```
+
+This will update the api workflow with that id with the updated fields such as name and config. In the response you should get the updated workflow like this:
+
+```json
+{
+  "id": "cm4tiiugd0000bm65pmfs56vt",
+  "userId": "cm4qt32l60004tr5e4p8xxjqb",
+  "config": {
+    "url": "https://updatedurl.com",
+    "screenshot": true
+  },
+  "name": "Updated name",
+  "lastRun": "2024-12-18T06:50:04.541Z",
+  "creditsSpent": 2,
+  "createdAt": "2024-12-18T06:29:30.926Z",
+  "updatedAt": "2024-12-18T06:29:30.926Z",
+  "archived": false
+}
+```

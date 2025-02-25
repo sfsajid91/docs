@@ -27,6 +27,7 @@
               "features/blocking",
               "features/output",
               "features/proxy",
+              "features/workflow",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",
