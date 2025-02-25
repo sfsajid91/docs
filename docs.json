@@ -24,7 +24,7 @@
             "group": "Features",
             "pages": [
               "features/rendering",
-              "essentials/code",
+              "features/blocking",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",

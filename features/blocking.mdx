@@ -1,0 +1,93 @@
+---
+title: "Blocking Resources"
+---
+
+During scraping or taking screenshots, unwanted elements such as ads, chat widgets, cookie banners, etc. can appear on the page. These elements can be annoying and can ruin the quality of the screenshots. To solve this problem, ScrapeAutomate provides flexibility to block these elements from appearing on the page.
+
+## Blocking Ads
+
+We all know how annoying ads can be, they can ruin the quality of the screenshots and can make the page look unprofessional. Ads can also slow down the page load time.
+
+To block ads, you need to include the `block_ads` query parameter in your request and set it to `true`. Here is an example:
+
+```shell cUrl
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_ads=true'
+```
+
+<Tip>
+  If ads are still appearing on the page, please create a support ticket so we
+  can investigate the issue.
+</Tip>
+
+## Blocking Chat Widgets
+
+Chat widgets can be distracting and may not be needed for your use case. For example, if you are taking screenshots of a page for a blog post, you may not want the chat widget to appear in the screenshots. To block chat widgets, you can use the `block_chat_widgets` query parameter and set it to `true`. Here is an demo:
+
+```shell cUrl
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_chat_widgets=true'
+```
+
+<Tip>
+  If chat widgets are still appearing on the page, feel free to create a support
+  ticket so we can investigate the issue.
+</Tip>
+
+## Blocking Cookie Banners
+
+Cookie banners often appear on websites to comply with privacy regulations. Sometimes it requires you to click on "Yes" or "No", which can be annoying and can ruin the quality of the screenshots. To avoid this, you can use the `block_cookie_banners` query parameter to block cookie banners from appearing. Here is an example:
+
+```shell cUrl
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_cookie_banners=true'
+```
+
+## Blocking Resources
+
+To optimize the performance of your scraping or to avoid loading unnecessary resources, you can use the `block_resources` query parameter. This feature allows you to block some specific resources from loading. This can include stylesheets, images, media and other elements that might not be needed for your use case.
+
+### Available Resource Types
+
+You can specify the type of resources you want to block. ScrapeAutomate supports the following resource types:
+
+- **stylesheet**: CSS files that are used to style the page.
+- **image**: Images that are used on the page.
+- **media**: Media files such as audio and video.
+- **font**: Font files that are used on the page.
+- **script**: JavaScript files that are used on the page (e.g., tracking scripts).
+- **texttrack**: Text track files that are used for subtitles and captions.
+- **xhr**: XMLHttpRequests that are used to fetch data from the server.
+- **fetch**: Fetch API requests.
+- **eventsource**: Server-sent events (SSE) that are used to push data from the server to the client.
+- **manifest**: Web app manifest files that are used to provide metadata about the web application.
+- **other**: Other types of resources that are not covered by the above types.
+
+To block resources, you need to include the `block_resources` query parameter in your request and specify the resource types you want to block. To block multiple resource types, you can separate them with a comma and a space. For example, to block images, videos, and fonts, you can set `block_resources=image, media, font`. Here is the full API request:
+
+```shell cUrl
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_resources=image%2C%20media%2C%20font'
+```
+
+<Tip>
+  Sometimes blocking resources can break the page layout or functionality. If
+  you encounter any issues, please create a support ticket so we can investigate
+  the issue.
+</Tip>
+
+## Frequently Asked Questions (FAQ)
+
+<Accordion title="1. Could blocking resources break the page layout or functionality?">
+  Yes, blocking resources can break the page layout or functionality. For
+  example, if you block CSS files, the page may not be styled correctly. If you
+  block JavaScript files, the page may not function as expected especially SPA
+  (Single Page Applications).
+</Accordion>
+
+<Accordion title="2. How do I know if I'm using these features correctly?">
+  If your requests are working as intended ads are gone, chat widgets are
+  blocked, and pages load faster—you're doing it right! But if something feels
+  off or isn't working, don't hesitate to reach out. We're always happy to help
+  you fine-tune your setup.
+</Accordion>
