@@ -23,7 +23,7 @@
           {
             "group": "Features",
             "pages": [
-              "essentials/markdown",
+              "features/rendering",
               "essentials/code",
               "essentials/images",
               "essentials/settings",

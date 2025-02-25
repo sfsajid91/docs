@@ -1,0 +1,267 @@
+---
+title: "Javascript Rendering"
+---
+
+Sometimes you may not get the required data from initial HTML response, as many modern websites rely on JavaScript to load content dynamically.
+
+To handle this type of websites, we have a feature called `JavaScript rendering` which emulates a real browser environment to fully load and render the page before extracting the data.
+This also allows to interact with the page, like clicking on buttons, filling forms, etc.
+
+## Enabling JavaScript Rendering
+
+To enable the Javascript rendering you need to pass `render=true` with the request. This will open a real browser environment to render the page, allows you to interact with the page, and extract the data that is not available in the initial HTML response.
+
+<Note>
+  Enabling JavaScript rendering is more expensive than standard requests,
+  **costing ten times as much**.
+</Note>
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com'
+```
+
+### Features of JavaScript Rendering
+
+There are some features that are available when using JavaScript rendering, such as:
+
+- [**Screenshot**](/feature/output#full-page-screenshot): Allows you to take a screenshot of the rendered page.
+- [**Blocking Resources**](/feature/blocking): Blocks specific resources from loading. e.g. images, scripts, ads, cookie banners, etc.
+- [**Instructions**](#instructions): Allows you to interact with the page, like clicking on buttons, filling forms, etc.
+- [**Window Width & Height**](#window-width-and-height): Enables you to specify the browser's window width and height.
+
+## Window Width & Height
+
+Sometimes, adjusting the browser window size is necessary to render a webpage correctly. Some elements may be hidden due to responsiveness, or the default screen dimensions might not fit your use case.
+
+ScrapeAutomate allows you to customize the browser's width and height using the window_width and window_height query parameters to handle this.
+
+### Setting Window Width
+
+The `window_width` parameter specifies the browser's width in pixels. It must be a positive integer; otherwise, you will receive a validation error. You can set up to a maximum value of 3820 as the window width.
+
+In the following example, we set the window width to 1920 pixels:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_width=1920'
+```
+
+### Setting Window Height
+
+Similarly, you can specify the browser height using the `window_height` parameter. The value must be a positive integer, and the maximum height is 2680 pixels. If you exceed this limit, you will receive a validation error.
+
+In this example, we set the window height to 1080 pixels:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080'
+```
+
+### Using Both Width & Height Together
+
+You can specify both `window_width` and `window_height` in a single request
+
+In this example, we set the browser window to 1920x1080:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080&window_width=1920'
+```
+
+<Note>
+  The default window size is 1920x1080 pixels. If you only specify one of the
+  parameters, the other will default to the default value.
+</Note>
+
+## Instructions
+
+ScrapeAutomate provides a set of instructions that allow you to interact with the page, like wait for an element, clicking on buttons, filling forms, submit form, etc. This provides fleixibility to interact with the page and extract the data that is not available in the initial HTML response.
+
+### Using Instructions
+
+To use the instructions, you must need to use JavaScript rendering. You can pass the instructions as an array of objects in the `instructions` query parameters. Each object can have different properties based on the instruction you want to perform.
+
+You can use our [Builder](https://app.scrapeautomate.com/builder) to generate the instructions easily.
+
+Here is an example of using instructions:
+
+{/* prettier-ignore */}
+```json
+[
+  {
+    "wait": ".btn"
+  },
+  {
+    "click": ".btn2"
+  }
+]
+```
+
+This set of instructions will wait for an element with matching `.btn` CSS selector to appear on the page, then click on the first element with the matching `.btn2` CSS selector. This accepts an array of command that will execute sequentially. The instructions parameter should be URL encoded before passing it to the API.
+
+Here is an example of using instructions in a request:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&instructions=%5B%7B%22wait%22%3A%22.btn%22%7D%2C%7B%22click%22%3A%22.btn2%22%7D%5D'
+```
+
+### Waiting for a selector
+
+Sometimes, elements on a page load dynamically, so you need to wait for them before taking any further actions. The `wait` instruction pauses the execution until the specified CSS selector is found on the page. This is very useful for handling SPA (Single Page Application) or dynamic content websites.
+
+This ensures that the page is fully loaded before proceeding to the next instruction. For instance, you want to ensure that a message element will be visible after submitting a form, you can use the `wait` instruction to wait for the message element to appear. The `wait` instruction accepts a CSS selector as a string.
+
+<Warning>
+  If the selector is not found or takes too long to appear, the API will return
+  an error message.
+</Warning>
+
+{/* prettier-ignore */}
+```json
+[
+  {
+    "wait": ".message"
+  }
+]
+```
+
+### Click on an element
+
+The `click` instruction simulates a click event on a specified CSS selector. It lets you programmatically click on a button, link, or any other element on the page. This is useful for navigating to another page, submitting a form, or triggering an action.
+
+This instruction often pairs with the `wait` instruction to ensure that the element is present before clicking on it. For example, on a search page, you can wait for the search button to appear and then click on it to submit the search query.
+
+{/* prettier-ignore */}
+```json
+[
+  {
+    "wait": ".search-button"
+  },
+  {
+    "click": ".search-button"
+  }
+]
+```
+
+### Delay
+
+The delay instruction pauses execution for a specified duration (in milliseconds) before performing the next action. This is useful when additional time is needed for animations, transitions, or content loading. For example, `delay: 5000` will pause for 5 seconds before proceeding to the next instruction.
+
+This can be useful when you need to wait for a specific time before performing the next action. For example, you can use the delay instruction to wait for a modal to appear after clicking a button.
+
+{/* prettier-ignore */}
+```json
+[
+  {
+    "click": ".open-modal"
+  },
+  {
+    "delay": 5000
+  },
+  {
+    "click": ".close-modal"
+  }
+]
+```
+
+### Fill in an input field
+
+The `fill` instruction inputs text into a specified form field. It accepts the following properties:
+
+- `selector`: The valid input field CSS selector.
+- `text`: The value text you want to input in that field.
+- `delay`: The number in ms of type speed. This is optional and defaults to 0.
+
+This instruction is useful for filling out forms, entering search queries, or providing user input. For example, you can use the `fill` instruction to input a search query into a search field.
+
+{/* prettier-ignore */}
+```json
+[
+  {
+    "fill": {
+      "selector": ".search-field",
+      "text": "foo bar",
+      "delay": 1000
+    }
+  }
+]
+```
+
+### Example of using multiple instructions
+
+Let's create a real example of using multiple instructions. We will use [DuckDuckGo](https://duckduckgo.com/) and [Wikipedia](https://www.wikipedia.org/) websites for this example.The process starts with vising the [DuckDuckGo](https://duckduckgo.com/) homepage, searching for "ScrapeAutomate", and clicking on the first search result. Then, we will visit the [Wikipedia](https://www.wikipedia.org/) homepage. We can summarize the process in few steps:
+
+1. Wait for the search box to appear and fill it with "wikipedia" then click on the search button.
+2. Wait for the search result to appear and click on the first search result.
+3. Wait for the wikipedia search box to appear and fill it with "automation" then click on the search button.
+4. Wait for the search result to appear.
+
+```json
+[
+  {
+    "wait": "#searchbox_input"
+  },
+  {
+    "fill": {
+      "selector": "#searchbox_input",
+      "text": "wikipedia",
+      "delay": 0
+    }
+  },
+  {
+    "click": "button[aria-label=\"Search\"]"
+  },
+
+  {
+    "wait": "[data-testid=\"result-title-a\"]"
+  },
+  {
+    "click": "[data-testid=\"result-title-a\"]"
+  },
+
+  {
+    "wait": "#searchInput"
+  },
+  {
+    "fill": {
+      "selector": "#searchInput",
+      "text": "automation",
+      "delay": 0
+    }
+  },
+  {
+    "click": "button[type=\"submit\"]"
+  },
+
+  {
+    "wait": ".mw-page-title-main"
+  }
+]
+```
+
+![Instraction Example](/gif/instructions.gif)
+
+However, this is just a simple example. You can create more complex instructions based on your requirements.
+
+## Frequently Asked Questions (FAQ)
+
+<Accordion title="1. How long does the API wait for a selector to appear when using `wait`?">
+  The API will wait up to 30 seconds for the specified selector to appear. If
+  the selector is not found within this time, the request will fail with an
+  error.
+</Accordion>
+
+<Accordion title="2. Does JavaScript rendering increase the cost of the request?">
+  Yes, enabling JavaScript rendering does increase the cost of the request. It
+  is significantly more resource-intensive, costing approximately ten times more
+  than a standard request. This is due to the need to open a real browser
+  environment to fully render the page.
+</Accordion>
+
+<Accordion title="3. What is the difference between `wait` and `delay`?">
+  There is a difference between `wait` and `delay`. `wait` pauses execution
+  until the specified selector appears on the page, while `delay` pauses
+  execution for a specified duration before proceeding to the next instruction.
+</Accordion>
