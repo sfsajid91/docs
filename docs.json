@@ -26,6 +26,7 @@
               "features/rendering",
               "features/blocking",
               "features/output",
+              "features/proxy",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",

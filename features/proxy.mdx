@@ -1,0 +1,51 @@
+---
+title: Proxies
+---
+
+## Proxy type
+
+Many websites employ sophisticated bot detection systems that can easily identify and block basic proxy connections. To prevent this, ScrapeAutomate gives flexibility in choosing the type of proxies you want to use. ScrapeAutomate has a variety of proxies available, and we also handle the proxy rotation for you to ensure that the same proxy isn't being used twice.
+
+To customize the proxy type, use the `proxy_type` query parameter to select better proxies. We use datacenter proxies by default, but you can specify proxies like residential, datacenter, or other available options. The types of proxies are entirely dynamic, and based on the proxy type, there could be a credit multiplier, which you can easily view on the dashboard builder page.
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential'
+```
+
+## Proxy country
+
+In some cases, the data or websites you want to scrape might be restricted by region, meaning it's only available in a specific country or region. ScrapeAutomate allows you to specify the country you want to make a request from using the `proxy_country` query parameter.
+
+To use this feature, provide the country code corresponding to the desired location. For example, setting `proxy_country=jp` will route the request through Japan, allowing you to scrape data available only in that region.
+
+This parameter can be used independently or in combination with `proxy_type` if you want to specify both the proxy type and location. If `proxy_type` is not specified, datacenter proxies will be used by default.
+
+Here is a demo:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp'
+```
+
+The `proxy_country` value is retrieved from the database. Let's say the specified country code does not exist in the database. In that case, the request will fail with an error that shows the proxy is unavailable.
+
+## Frequently Asked Questions (FAQ)
+
+<Accordion title="Why should I use proxies?">
+  Some websites have better bot protection than others; using better types of
+  proxies, like residential or verified proxies, allows you to scrape easily
+  without getting as many errors. However, these are more costly as they
+  increase your chance of getting more successful requests.
+</Accordion>
+
+<Accordion title="Can I use my own proxies with ScrapeAutomate?">
+  You can't specify your proxies with ScrapeAutomate as it makes it harder for
+  us to scrape successfully and may increase the chance of failure and costs.
+</Accordion>
+
+<Accordion title="How much do different types of proxies cost?">
+  Each proxy type has its own multiplier, which affects the cost of the proxy.
+  By default, datacenter proxies don't cost anything extra, but selecting other
+  types of proxies will increase the cost based on the multiplier.
+</Accordion>
