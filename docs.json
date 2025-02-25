@@ -10,19 +10,15 @@
   "api": {
     "examples": {}
   },
-  "appearance": {
-    "default": "light",
-    "strict": true
-  },
   "favicon": "/icon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
-            "group": "Get Started",
-            "pages": ["introduction", "quickstart", "development"]
+            "group": "Quickstart",
+            "pages": ["docs/introduction", "docs/overview"]
           },
           {
             "group": "Essentials",

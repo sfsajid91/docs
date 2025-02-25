@@ -1,0 +1,92 @@
+---
+title: "Overview"
+description: "Here is a list of different `parameters` you can use with ScrapeAutomate. This overview will help you get started with ScrapeAutomate while ensuring secure usage of your credentials."
+---
+
+### Query Parameters
+
+| Parameter                                            | Type      | Description                                                                                                                                                                                                     | Required | Default                                                            |
+| ---------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------ |
+| <u>[api_key](#api-key)</u>                           | `string`  | Your unique API key to authenticate every request.                                                                                                                                                              | `true`   | <u>[Get your API key](https://app.scrapeautomate.com/register)</u> |
+| <u>[url](#url)</u>                                   | `string`  | The URL of the web page you want to scrape.                                                                                                                                                                     | `true`   |                                                                    |
+| <u>[render](#render)</u>                             | `boolean` | Whether to render JavaScript while scraping.                                                                                                                                                                    | `false`  | `false`                                                            |
+| <u>[window_width](#window_width)</u>                 | `number`  | The width of the browser window.                                                                                                                                                                                | `false`  | `1920`                                                             |
+| <u>[window_height](#window_height)</u>               | `number`  | The height of the browser window.                                                                                                                                                                               | `false`  | `1080`                                                             |
+| <u>[markdown](#markdown)</u>                         | `boolean` | Returns the scraped data in markdown.                                                                                                                                                                           | `false`  | `false`                                                            |
+| <u>[screenshot](#screenshot)</u>                     | `boolean` | Returns screenshot of the web page.                                                                                                                                                                             | `false`  | `false`                                                            |
+| <u>[instructions](#instructions)</u>                 | `string`  | This Allows you to interact with the web page.                                                                                                                                                                  | `false`  |                                                                    |
+| <u>[proxy_type](#proxy_type)</u>                     | `string`  | The type of proxy to use while scraping for better anonymity, performance and speed                                                                                                                             | `false`  |                                                                    |
+| <u>[proxy_country](#proxy_location)</u>              | `string`  | The location of the proxy server.                                                                                                                                                                               | `false`  |                                                                    |
+| <u>[workflow_id](#workflow_id)</u>                   | `string`  | Reuse configurations from a saved workflow.                                                                                                                                                                     | `false`  |                                                                    |
+| <u>[webhook_url](#webhook_url)</u>                   | `string`  | Used for setting a webhook where the response will be sent to.                                                                                                                                                  | `false`  |                                                                    |
+| <u>[block_resources](#block_resources)</u>           | `boolean` | Blocks specific web resources (stylesheets, images, media, etc.) during automation using block_resources. Separate multiple resources with "," . Useful for faster scraping and preventing unnecessary loading. | `false`  | `false`                                                            |
+| <u>[block_ads](#block_ads)</u>                       | `boolean` | Whether to block ads while scraping.                                                                                                                                                                            | `false`  | `false`                                                            |
+| <u>[block_chat_widgets](#block_chat_widgets)</u>     | `boolean` | Automatically block chat widgets from appearing in the ui.scraping.                                                                                                                                             | `false`  | `false`                                                            |
+| <u>[block_cookie_banners](#block_cookie_banners)</u> | `boolean` | Automatically block cookie banners from appearing in the ui.scraping.                                                                                                                                           | `false`  | `false`                                                            |
+
+## Getting Started
+
+ScrapeAutomate is one of the easiest scraping tools available on the web.
+
+To get started with scraping, you only need **two** things:
+
+- Your unique `api_key`
+- The `Encoded URL` of the web page you want to scrape.
+
+<Note>
+  You can get your **API key** after creating an account on{" "}
+  <u>[ScrapeAutomate](https://app.scrapeautomate.com/register)</u>.
+</Note>
+
+### API Key
+
+Your unique API key is essential to authenticate every API request. After creating and verifying your account on <u>[ScrapeAutomate](https://scrapeautomate.com)</u>, your API key will be visible on the builder page as highlighted in the image below.
+
+![API Key Example](../images/api-key.png)
+
+#### Code Example
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>'
+```
+
+<Warning>
+  Do not share your **API key** with anyone. Sharing your API key can lead to
+  **unauthorized access, unexpected charges, and potential security
+  vulnerabilities**.
+</Warning>
+
+### URL
+
+You must provide an `encoded-URL` to use ScrapeAutomate API. Encoding ensures that the URL is processed correctly by the API and that special characters (like spaces, question marks, and ampersands) do not cause issues.
+
+You can use websites like [urlencoder](https://www.urlencoder.org/) to easily encode your URLs.
+
+![URL Example](../images/url-encoder.png)
+
+After encoding the URL, pass it in the query parameter named `url` as shown below:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com''
+```
+
+<Note>
+  The `url` parameter and `api_key` are both required. If any of these
+  parameters are missing, your request won't be processed.
+</Note>
+
+### Render
+
+The **render** parameter is a boolean value that determines whether ScrapeAutomate should render javascript while scraping. Setting render to `true` enables features like taking screenshots, blocking specific resources, form-filling, and clicking elements.
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com''
+```
+
+<Info>
+  By default, the **render** parameter is set to `false`. Note that launching a
+  browser consumes more ten times more credits.
+</Info>
