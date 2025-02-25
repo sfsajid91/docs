@@ -27,12 +27,12 @@
               "features/blocking",
               "features/output",
               "features/proxy",
-              "features/workflow",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "features/workflow"
             ]
+          },
+          {
+            "group": "Help",
+            "pages": ["help/payment", "help/gloassary"]
           }
         ]
       },
