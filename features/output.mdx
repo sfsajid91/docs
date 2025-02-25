@@ -1,0 +1,113 @@
+---
+title: "Output Types"
+description: "You can specify the output type of the response you want to receive from the API."
+---
+
+## Plain HTML
+
+The response will be plain HTML if you do not explicitly specify the output types with your request. This applies to both whether JavaScript rendering is enabled or disabled.
+
+Example request:
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F'
+```
+
+```HTML
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+...
+```
+
+## Markdown
+
+ScrapeAutomate allows you to generate markdowns from a webpage very easily. By including the `markdown=true` parameter in your request, the response will be returned in Markdown format. This is useful for extracting content for LLMs or simplifying web data for better readability.
+
+You can use this with both javascript rendering enabled or disabled, but you might need to use javascript rendering when loading dynamic content from a webpage.
+
+Remember, ScrapeAutomate automatically removes unnecessary elements, such as navbars, from the body content.
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true'
+```
+
+```md https://example.com/
+# Example Domain
+
+This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.
+
+[More information...](https://www.iana.org/domains/example)
+```
+
+## Screenshot
+
+To capture a screenshot of the webpage, we provide two query parameters. Screenshots are currently available only in **PNG** format:
+
+- `screenshot`: Capture a screenshot of the visible area of the webpage.
+- `screenshot_full_page`: It captures a screenshot of the entire webpage, including the parts that are not visible.
+
+Since screenshots rely on rendering the page visually, JavaScript rendering must be enabled to use this feature.
+
+### Screenshot of Visible Area
+
+To capture a screenshot of the visible area, include the `screenshot` query parameter and set it to `true` with a request. The response will contain a `png` image.
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true'
+```
+
+### Full Page Screenshot
+
+To capture a screenshot of the entire page, set the `screenshot_full_page` parameter to `true`. This will take a full-page screenshot of the webpage and return it as part of the API response.
+
+```shell cURL
+curl --request GET \
+    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true'
+```
+
+## Webhook
+
+If you prefer to have your responses sent to a webhook instead of receiving them directly, you can utilize our **Webhook feature**. To use the webhook you need to simply include your `webhook_url` in the query parameters, and the API will send the response to that webhook. You can receive all types of responses, including HTML, Markdown, and screenshots.
+
+```shell cURL
+curl --request GET \
+    --url 'http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1'
+```
+
+When you call the API, it will automatically send the response to the specified webhook instead of returning the response data directly to the requester. However, you will still receive a confirmation indicating whether or not the webhook was successfully triggered. Here's an example:
+
+```json
+{
+  "status": "ok",
+  "message": "Webhook sent successfully"
+}
+```
+
+One important thing to note is that if you use a webhook, you will always receive a success message in response to your API request, even if an error occurs during the scraping process. Any errors encountered will be sent directly to the webhook rather than being returned in the main request.
+
+This functionality also applies to API workflows. Just ensure that you include the webhook URL in the query parameters when creating or editing the workflow. This way, when you send a request to the scraper route, the response will be delivered directly to the specified webhook.
+
+<Accordion title="1. Can I use multiple output types?">
+  Currently, we do not support multiple output types. However, in the near
+  future, you will have the ability to select multiple output types!
+</Accordion>
+
+<Accordion title="2. Can I use a webhook with API workflows?">
+  Yes, you can use a webhook with workflows. Just make sure to set the webhook
+  when creating or edit a workflow.
+</Accordion>
+
+<Accordion title="3. How can I ensure that the entire webpage has loaded before returning an response?">
+  By default, we already wait for the entire webpage to load before returning a
+  response!
+</Accordion>

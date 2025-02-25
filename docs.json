@@ -25,6 +25,7 @@
             "pages": [
               "features/rendering",
               "features/blocking",
+              "features/output",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",

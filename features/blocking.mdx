@@ -10,7 +10,7 @@ We all know how annoying ads can be, they can ruin the quality of the screenshot
 
 To block ads, you need to include the `block_ads` query parameter in your request and set it to `true`. Here is an example:
 
-```shell cUrl
+```shell cURL
 curl --request GET \
     --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_ads=true'
 ```
@@ -24,7 +24,7 @@ curl --request GET \
 
 Chat widgets can be distracting and may not be needed for your use case. For example, if you are taking screenshots of a page for a blog post, you may not want the chat widget to appear in the screenshots. To block chat widgets, you can use the `block_chat_widgets` query parameter and set it to `true`. Here is an demo:
 
-```shell cUrl
+```shell cURL
 curl --request GET \
     --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_chat_widgets=true'
 ```
@@ -38,7 +38,7 @@ curl --request GET \
 
 Cookie banners often appear on websites to comply with privacy regulations. Sometimes it requires you to click on "Yes" or "No", which can be annoying and can ruin the quality of the screenshots. To avoid this, you can use the `block_cookie_banners` query parameter to block cookie banners from appearing. Here is an example:
 
-```shell cUrl
+```shell cURL
 curl --request GET \
     --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_cookie_banners=true'
 ```
@@ -65,7 +65,7 @@ You can specify the type of resources you want to block. ScrapeAutomate supports
 
 To block resources, you need to include the `block_resources` query parameter in your request and specify the resource types you want to block. To block multiple resource types, you can separate them with a comma and a space. For example, to block images, videos, and fonts, you can set `block_resources=image, media, font`. Here is the full API request:
 
-```shell cUrl
+```shell cURL
 curl --request GET \
     --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_resources=image%2C%20media%2C%20font'
 ```
