@@ -18,10 +18,10 @@
         "groups": [
           {
             "group": "Quickstart",
-            "pages": ["docs/introduction", "docs/overview"]
+            "pages": ["introduction", "overview"]
           },
           {
-            "group": "Essentials",
+            "group": "Features",
             "pages": [
               "essentials/markdown",
               "essentials/code",
