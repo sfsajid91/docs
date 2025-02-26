@@ -9,10 +9,101 @@ The response will be plain HTML if you do not explicitly specify the output type
 
 Example request:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 ```HTML
 <!doctype html>
@@ -35,10 +126,101 @@ You can use this with both javascript rendering enabled or disabled, but you mig
 
 Remember, ScrapeAutomate automatically removes unnecessary elements, such as navbars, from the body content.
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 ```md https://example.com/
 # Example Domain
@@ -61,28 +243,301 @@ Since screenshots rely on rendering the page visually, JavaScript rendering must
 
 To capture a screenshot of the visible area, include the `screenshot` query parameter and set it to `true` with a request. The response will contain a `png` image.
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 ### Full Page Screenshot
 
 To capture a screenshot of the entire page, set the `screenshot_full_page` parameter to `true`. This will take a full-page screenshot of the webpage and return it as part of the API response.
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 ## Webhook
 
 If you prefer to have your responses sent to a webhook instead of receiving them directly, you can utilize our **Webhook feature**. To use the webhook you need to simply include your `webhook_url` in the query parameters, and the API will send the response to that webhook. You can receive all types of responses, including HTML, Markdown, and screenshots.
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1'
+    --url 'http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "http://localhost:8002/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252Fees&config=%7B%22window_width%22%3A1920%2C%22window_height%22%3A1080%7D&webhook_url=https%3A%2F%2Fwebhook.site%2F7132edb4-8590-4bc0-9055-30e2153936d1 HTTP/1.1
+Host: localhost:8002
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 When you call the API, it will automatically send the response to the specified webhook instead of returning the response data directly to the requester. However, you will still receive a confirmation indicating whether or not the webhook was successfully triggered. Here's an example:
 

@@ -32,10 +32,101 @@ To use an api workflow you will need to get the ID of the workflow, to get the a
 
 After copying the ID, send the workflow id as a query parameter with your api key to run the scraping request, After you run the request you should get the response:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5 HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 Keep in mind that if you are using any kind of webhook, you will get the response at the webhook rather then directly getting the response. Instead you might an response saying:
 
@@ -80,10 +171,99 @@ To easily manage and use the api workflows in your codebase, we provide some ver
 
 To get all of a user's workflows you will need to send a `GET` request to this api route along with your api key, if your api key is invalid then the api won't return your workflows and instead return an error. Here is an example request:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>'
+    --url 'https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get('https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>')  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/workflow?api_key=<exampleToken> HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 You should get a response like this:
 
@@ -114,10 +294,99 @@ To get the requests made using a specific workflow you need to get the id of the
 
 Using the workflow id send an GET request to the following URL with your api key and workflow id like this:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>'
+    --url 'https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get('https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>')  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/workflow/requests/${requestId}/?api_key=<exampleToken> HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 If everything is correct, In the response you should see an array of requests which were made using that workflow.
 
@@ -140,6 +409,9 @@ In the body you have to send an JSON object which contains the following data:
 
 If everything is correct you should have a response with the created workflow. Here is an example request:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl -X POST "<EnvValue name=\"dashboardAPI\"/>/workflow/create/?api_key=<exampleApiKey>" \
      -H "Content-Type: application/json" \
@@ -149,8 +421,159 @@ curl -X POST "<EnvValue name=\"dashboardAPI\"/>/workflow/create/?api_key=<exampl
               "url": "https://example.com",
               "screenshot": true
           }
-        }'
+        }'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.post(
+  'http://<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>',
+  // '{\n          "name": "Test workflow",\n          "config": {\n              "url": "https://example.com",\n              "screenshot": true\n          }\n        }',
+  {
+    'name': 'Test workflow',
+    'config': {
+      'url': 'https://example.com',
+      'screenshot': true
+    }
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+);  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("http://<EnvValue name=\"dashboardAPI\"/>/workflow/create/?api_key=<exampleApiKey>"))
+    .POST(BodyPublishers.ofString("{\n          \"name\": \"Test workflow\",\n          \"config\": {\n              \"url\": \"https://example.com\",\n              \"screenshot\": true\n          }\n        }"))
+    .setHeader("Content-Type", "application/json")
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+headers = {
+    'Content-Type': 'application/json',
+}
+
+json_data = {
+    'name': 'Test workflow',
+    'config': {
+        'url': 'https://example.com',
+        'screenshot': True,
+    },
+}
+
+response = requests.post(
+    'http://<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>',
+    headers=headers,
+    json=json_data,
+)
+
+# Note: json_data will not be serialized by requests
+# exactly as it was in the original request.
+#data = '{\n          "name": "Test workflow",\n          "config": {\n              "url": "https://example.com",\n              "screenshot": true\n          }\n        }'
+#response = requests.post(
+#    'http://<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>',
+#    headers=headers,
+#    data=data,
+#)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'http://<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n          \"name\": \"Test workflow\",\n          \"config\": {\n              \"url\": \"https://example.com\",\n              \"screenshot\": true\n          }\n        }");
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"strings"
+)
+
+func main() {
+	client := &http.Client{}
+	var data = strings.NewReader(`{
+          "name": "Test workflow",
+          "config": {
+              "url": "https://example.com",
+              "screenshot": true
+          }
+        }`)
+	req, err := http.NewRequest("POST", "http://<EnvValue name=\"dashboardAPI\"/>/workflow/create/?api_key=<exampleApiKey>", data)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+POST />/workflow/create/?api_key=<exampleApiKey> HTTP/1.1
+Host: <EnvValue name="dashboardAPI"
+User-Agent: curl/8.2.1
+Accept: */*
+Content-Type: application/json
+Content-Length: 157
+
+{
+          "name": "Test workflow",
+          "config": {
+              "url": "https://example.com",
+              "screenshot": true
+          }
+        }  
+```
+    
+</CodeGroup>
+    
 
 Response:
 
@@ -176,9 +599,103 @@ Response:
 
 To archive a workflow you need to set an DELETE request to the following api, with the workflow id you want to archive and your api key for authentication.
 
+
+<CodeGroup>
+
 ```shell cURL
-curl -X DELETE "https://app.scrapeautomate.com/api/workflow/archive/${workflowId}?api_key=<exampleApiKey>
+curl -X DELETE "https://app.scrapeautomate.com/api/workflow/archive/${workflowId}?api_key=<exampleApiKey>  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.delete('https://app.scrapeautomate.com/api/workflow/archive/' + process.env['workflowId'] + '?api_key=<exampleApiKey>');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.lang.System;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/workflow/archive/" + System.getenv("workflowId") + "?api_key=<exampleApiKey>"))
+    .DELETE()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import os
+import requests
+
+response = requests.delete(
+    'https://app.scrapeautomate.com/api/workflow/archive/' + os.getenv('workflowId', '') + '?api_key=<exampleApiKey>',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/workflow/archive/' . getenv('workflowId') ?? '' . '?api_key=<exampleApiKey>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("DELETE", "https://app.scrapeautomate.com/api/workflow/archive/" + os.Getenv("workflowId") + "?api_key=<exampleApiKey>", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+DELETE /api/workflow/archive/${workflowId}?api_key=<exampleApiKey> HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 After you send the request you will notice that your workflow has been automatically archived. Once a workflow has been archived you will no longer be able to edit or use the workflow. If you would like to revert this you may unacrhive the workflow.
 
@@ -186,15 +703,112 @@ After you send the request you will notice that your workflow has been automatic
 
 If you would like to unarchive a workflow you need to send an POST request to the following api, with the workflow id you want to unarchive and your api key.
 
+
+<CodeGroup>
+
 ```shell cURL
-curl -X POST "https://app.scrapeautomate.com/api/workflow/unarchive/${workflowId}?api_key=<exampleApiKey>"
+curl -X POST "https://app.scrapeautomate.com/api/workflow/unarchive/${workflowId}?api_key=<exampleApiKey>"  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.post('https://app.scrapeautomate.com/api/workflow/unarchive/' + process.env['workflowId'] + '?api_key=<exampleApiKey>');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.lang.System;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/workflow/unarchive/" + System.getenv("workflowId") + "?api_key=<exampleApiKey>"))
+    .POST(HttpRequest.BodyPublishers.noBody())
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import os
+import requests
+
+response = requests.post(
+    'https://app.scrapeautomate.com/api/workflow/unarchive/' + os.getenv('workflowId', '') + '?api_key=<exampleApiKey>',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/workflow/unarchive/' . getenv('workflowId') ?? '' . '?api_key=<exampleApiKey>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", "https://app.scrapeautomate.com/api/workflow/unarchive/" + os.Getenv("workflowId") + "?api_key=<exampleApiKey>", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+POST /api/workflow/unarchive/${workflowId}?api_key=<exampleApiKey> HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 Once you send an request and if everything is successful you will be able to use and edit that workflow again.
 
 ### Edit a workflow
 
 If you would like to edit the name or the configuration of the workflow, its very simple. You just need to send an PATCH to the following api with the field you would like to update such as the name or the config field. No other field is editable. Here is an example:
+
+
+<CodeGroup>
 
 ```shell cURL
 curl -X PATCH "<EnvValue name=\"dashboardAPI\"/>/workflow/edit/${workflowId}?api_key=<exampleApiKey>" \
@@ -206,8 +820,166 @@ curl -X PATCH "<EnvValue name=\"dashboardAPI\"/>/workflow/edit/${workflowId}?api
                "screenshot": true,
                "render": true
            }
-         }'
+         }'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.patch(
+  'http://<EnvValue name="dashboardAPI"/>/workflow/edit/' + process.env['workflowId'] + '?api_key=<exampleApiKey>',
+  // '{\n           "name": "Updated name",\n           "config": {\n               "url": "https://updatedurl.com",\n               "screenshot": true,\n               "render": true\n           }\n         }',
+  {
+    'name': 'Updated name',
+    'config': {
+      'url': 'https://updatedurl.com',
+      'screenshot': true,
+      'render': true
+    }
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+);  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.lang.System;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("http://<EnvValue name=\"dashboardAPI\"/>/workflow/edit/" + System.getenv("workflowId") + "?api_key=<exampleApiKey>"))
+    .method("PATCH", BodyPublishers.ofString("{\n           \"name\": \"Updated name\",\n           \"config\": {\n               \"url\": \"https://updatedurl.com\",\n               \"screenshot\": true,\n               \"render\": true\n           }\n         }"))
+    .setHeader("Content-Type", "application/json")
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import os
+import requests
+
+headers = {
+    'Content-Type': 'application/json',
+}
+
+json_data = {
+    'name': 'Updated name',
+    'config': {
+        'url': 'https://updatedurl.com',
+        'screenshot': True,
+        'render': True,
+    },
+}
+
+response = requests.patch(
+    'http://<EnvValue name="dashboardAPI"/>/workflow/edit/' + os.getenv('workflowId', '') + '?api_key=<exampleApiKey>',
+    headers=headers,
+    json=json_data,
+)
+
+# Note: json_data will not be serialized by requests
+# exactly as it was in the original request.
+#data = '{\n           "name": "Updated name",\n           "config": {\n               "url": "https://updatedurl.com",\n               "screenshot": true,\n               "render": true\n           }\n         }'
+#response = requests.patch(
+#    'http://<EnvValue name="dashboardAPI"/>/workflow/edit/' + os.getenv('workflowId', '') + '?api_key=<exampleApiKey>',
+#    headers=headers,
+#    data=data,
+#)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'http://<EnvValue name="dashboardAPI"/>/workflow/edit/' . getenv('workflowId') ?? '' . '?api_key=<exampleApiKey>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n           \"name\": \"Updated name\",\n           \"config\": {\n               \"url\": \"https://updatedurl.com\",\n               \"screenshot\": true,\n               \"render\": true\n           }\n         }");
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func main() {
+	client := &http.Client{}
+	var data = strings.NewReader(`{
+           "name": "Updated name",
+           "config": {
+               "url": "https://updatedurl.com",
+               "screenshot": true,
+               "render": true
+           }
+         }`)
+	req, err := http.NewRequest("PATCH", "http://<EnvValue name=\"dashboardAPI\"/>/workflow/edit/" + os.Getenv("workflowId") + "?api_key=<exampleApiKey>", data)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+PATCH />/workflow/edit/${workflowId}?api_key=<exampleApiKey> HTTP/1.1
+Host: <EnvValue name="dashboardAPI"
+User-Agent: curl/8.2.1
+Accept: */*
+Content-Type: application/json
+Content-Length: 196
+
+{
+           "name": "Updated name",
+           "config": {
+               "url": "https://updatedurl.com",
+               "screenshot": true,
+               "render": true
+           }
+         }  
+```
+    
+</CodeGroup>
+    
 
 This will update the api workflow with that id with the updated fields such as name and config. In the response you should get the updated workflow like this:
 

@@ -8,10 +8,101 @@ Many websites employ sophisticated bot detection systems that can easily identif
 
 To customize the proxy type, use the `proxy_type` query parameter to select better proxies. We use datacenter proxies by default, but you can specify proxies like residential, datacenter, or other available options. The types of proxies are entirely dynamic, and based on the proxy type, there could be a credit multiplier, which you can easily view on the dashboard builder page.
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 ## Proxy country
 
@@ -23,10 +114,101 @@ This parameter can be used independently or in combination with `proxy_type` if 
 
 Here is a demo:
 
+
+<CodeGroup>
+
 ```shell cURL
 curl --request GET \
-    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp'  
 ```
+       
+
+```javascript Node.js
+import axios from 'axios';
+
+const response = await axios.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp');  
+```
+    
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());  
+```
+    
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp',
+)  
+```
+    
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);  
+```
+    
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}  
+```
+    
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*  
+```
+    
+</CodeGroup>
+    
 
 The `proxy_country` value is retrieved from the database. Let's say the specified country code does not exist in the database. In that case, the request will fail with an error that shows the proxy is unavailable.
 
