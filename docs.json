@@ -45,19 +45,15 @@
         "tab": "API Reference",
         "groups": [
           {
-            "group": "API Documentation",
-            "pages": ["api-reference/introduction"]
-          },
-          {
             "group": "Endpoint Examples",
             "pages": [
-              "api-reference/endpoint/archive-workflow",
-              "api-reference/endpoint/create-workflow",
-              "api-reference/endpoint/get-requests",
-              "api-reference/endpoint/retrive-workflow",
-              "api-reference/endpoint/update-workflow",
-              "api-reference/endpoint/unarchive-workflow",
-              "api-reference/endpoint/scraper-endpoint"
+              "api-reference/scraper-endpoint",
+              "api-reference/create-workflow",
+              "api-reference/retrive-workflow",
+              "api-reference/get-requests",
+              "api-reference/update-workflow",
+              "api-reference/archive-workflow",
+              "api-reference/unarchive-workflow"
             ]
           }
         ]
