@@ -1,94 +1,311 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "Scraper Route Documentation",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://app.scrapeautomate.com",
+      "description": "Production Server"
     }
   ],
   "paths": {
-    "/plants": {
+    "/api/scraper": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "summary": "Scraper Endpoint",
+        "operationId": "scrape",
+        "description": "Handles scraping requests with optional rendering, screenshots, and workflow support.",
         "parameters": [
           {
-            "name": "limit",
+            "name": "api_key",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "description": "API key for authentication.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "your-api-key"
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "The URL to scrape.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "https://example.com"
+            }
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "description": "Indicates if rendering is required.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": true
+            }
+          },
+          {
+            "name": "window_height",
+            "in": "query",
+            "description": "The height of the browser window.",
+            "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "example": 800
+            }
+          },
+          {
+            "name": "window_width",
+            "in": "query",
+            "description": "The width of the browser window.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1200
+            }
+          },
+          {
+            "name": "screenshot",
+            "in": "query",
+            "description": "If set to true, captures a screenshot of the page.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": false
+            }
+          },
+          {
+            "name": "screenshot_full_page",
+            "in": "query",
+            "description": "If set to true, captures a full-page screenshot.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": false
+            }
+          },
+          {
+            "name": "workflow_id",
+            "in": "query",
+            "description": "Workflow ID to use pre-configured settings.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "workflow-12345"
+            }
+          },
+          {
+            "name": "block_resources",
+            "in": "query",
+            "description": "Comma-separated list of resources to block (e.g., images, css).",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "images,css"
+            }
+          },
+          {
+            "name": "markdown",
+            "in": "query",
+            "description": "If set to true, will return the website in an markdown format.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": "true"
+            }
+          },
+          {
+            "name": "block_ads",
+            "in": "query",
+            "description": "Used for blocking ads from appearing",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": "true"
+            }
+          },
+          {
+            "name": "block_cookie_banners",
+            "in": "query",
+            "description": "Used for blocking ads from cookie banners from appearing",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": "true"
+            }
+          },
+          {
+            "name": "block_chat_widgets",
+            "in": "query",
+            "description": "Used for blocking chat widgets from appearing",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": "true"
+            }
+          },
+          {
+            "name": "webhook_url",
+            "in": "query",
+            "description": "URL to send the scraping response to via webhook.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "https://webhook.site/12345"
+            }
+          },
+          {
+            "name": "proxy_type",
+            "in": "query",
+            "description": "Type of proxy to use for the request.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "residential"
+            }
+          },
+          {
+            "name": "proxy_country",
+            "in": "query",
+            "description": "Country code for the proxy location.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "US"
+            }
+          },
+          {
+            "name": "instructions",
+            "in": "query",
+            "description": "Array of instructions for browser automation in an encoded json, keep in mind to send it stringified in the url",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "wait": {
+                    "type": "string",
+                    "description": "Selector to wait for"
+                  },
+                  "fill": {
+                    "type": "object",
+                    "properties": {
+                      "selector": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Element selector to fill"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Text to input"
+                      },
+                      "delay": {
+                        "type": "number",
+                        "minimum": 0,
+                        "default": 0,
+                        "description": "Delay in milliseconds"
+                      }
+                    },
+                    "required": ["selector", "text"]
+                  },
+                  "click": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Selector to click"
+                  },
+                  "delay": {
+                    "type": "number",
+                    "minimum": 1,
+                    "description": "Delay in milliseconds"
+                  }
+                }
+              },
+              "example": "[{\"wait\":\"#element\"},{\"fill\":{\"selector\":\"#input\",\"text\":\"hello\",\"delay\":1000}},{\"click\":\"#submit\"},{\"delay\":2000}]"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Scraping request completed successfully.",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request or invalid parameters.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Workflow is archived!"
+                    }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "Unexpected error",
+          "402": {
+            "description": "Payment required due to insufficient credits.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Insufficient credits to make the request."
+                    }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "403": {
+            "description": "Forbidden due to missing API key or insufficient permissions.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "API Key is required!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Workflow not found!"
+                    }
+                  }
                 }
               }
             }
@@ -96,99 +313,356 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/api/workflow/create": {
+      "post": {
+        "summary": "Create a new workflow",
+        "operationId": "createWorkflow",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "window_height": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 2680
+                      },
+                      "window_width": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 3820
+                      },
+                      "screenshot": {
+                        "type": "boolean"
+                      },
+                      "screenshot_full_page": {
+                        "type": "boolean"
+                      },
+                      "instructions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "wait": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "fill": {
+                              "type": "object",
+                              "properties": {
+                                "selector": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "delay": {
+                                  "default": 0,
+                                  "type": "number",
+                                  "minimum": 0
+                                }
+                              },
+                              "required": ["selector", "text"]
+                            },
+                            "click": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "delay": {
+                              "type": "number",
+                              "minimum": 1
+                            }
+                          }
+                        }
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "render": {
+                        "default": false,
+                        "type": "boolean"
+                      },
+                      "block_resources": {
+                        "type": "string"
+                      },
+                      "webhook_url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["url"],
+                    "additionalProperties": false
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["config", "name"],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workflow created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/workflow/{id}": {
+      "get": {
+        "summary": "Get a workflow by ID",
+        "operationId": "getWorkflowById",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of plant to delete",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
+          "200": {
+            "description": "Workflow retrieved successfully"
           }
         }
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    "/api/workflow/${id}": {
+      "patch": {
+        "summary": "Update an existing workflow",
+        "operationId": "updateWorkflow",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "window_height": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 2680
+                      },
+                      "window_width": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 3820
+                      },
+                      "screenshot": {
+                        "type": "boolean"
+                      },
+                      "screenshot_full_page": {
+                        "type": "boolean"
+                      },
+                      "instructions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "wait": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "fill": {
+                              "type": "object",
+                              "properties": {
+                                "selector": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "delay": {
+                                  "default": 0,
+                                  "type": "number",
+                                  "minimum": 0
+                                }
+                              },
+                              "required": ["selector", "text"]
+                            },
+                            "click": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "delay": {
+                              "type": "number",
+                              "minimum": 1
+                            }
+                          }
+                        }
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "render": {
+                        "default": false,
+                        "type": "boolean"
+                      },
+                      "block_resources": {
+                        "type": "string"
+                      },
+                      "webhook_url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["url"],
+                    "additionalProperties": false
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workflow updated successfully"
+          }
+        }
+      }
+    },
+    "/api/workflow/archive/{id}": {
+      "delete": {
+        "summary": "Archive a workflow using the workflow id",
+        "operationId": "archiveWorkflowById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow archived permanently successfully"
+          }
+        }
+      }
+    },
+    "/api/workflow/unarchive/{id}": {
+      "post": {
+        "summary": "Unarchive a workflow using workflow ID",
+        "operationId": "permanentlyUnarchiveWorkflowById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow unarchived workflow successfully"
+          }
+        }
+      }
+    },
+    "/api/workflow/requests/${id}": {
+      "get": {
+        "summary": "Get all requests made by a workflow",
+        "operationId": "getRequestsUsingWorkflow",
+        "responses": {
+          "200": {
+            "description": "List all requests using workflow"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   }

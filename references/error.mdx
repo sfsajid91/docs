@@ -1,0 +1,60 @@
+---
+title: Errors
+---
+
+Errors in the ScrapeAutomate API may occur due to invalid options, internal issues, or when the credit limit is reached. Whenever an error occurs, the API provides a clear and descriptive error message to help identify the problem.
+
+## Example Error Response
+
+Here is an example of an error response when no API key is provided:
+
+```http Error Response
+
+GET 'https://app.scrapeautomate.com/api/scraper?api_key=[OPTIONS]'
+
+HTTP/1.1 404 Not Found
+vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+content-type: application/json
+Date: Thu, 23 Jan 2025 12:10:33 GMT
+Connection: close
+Transfer-Encoding: chunked
+
+{
+  "success": false,
+  "message": "User with that API key not found!",
+  "errorCode": "api_key_invalid",
+  "stack": "Error: User with that API key not found"
+}
+
+```
+
+## Error Response Structure
+
+Each error response includes:
+
+- `errorCode`: A string key for precise categorization of the error.
+- `message`: A detailed description of the error.
+- `stack`: The stack trace of the error (included only in development mode).
+- `status`: The HTTP status code associated with the error.
+
+## Common Error Codes
+
+The API uses standardized error codes to indicate various error conditions. Here's a comprehensive list of error codes you might encounter:
+
+| **ERROR CODE**                  | **STATUS_CODE** | **DESCRIPTION**                                                       |
+| ------------------------------- | --------------- | --------------------------------------------------------------------- |
+| **workflow_archived**           | 400             | Workflow is archived.                                                 |
+| **token_required**              | 400             | Token is required.                                                    |
+| **validation_error**            | 400             | Invalid data                                                          |
+| **payment_required**            | 402             | Insufficient credits to make the request.                             |
+| **user_not_allowed**            | 403             | User not allowed to send scraping request.                            |
+| **api_key_required**            | 401             | Api key is required.                                                  |
+| **api_key_invalid**             | 404             | User with that api key not found.                                     |
+| **request_not_found**           | 404             | Request or resource not found.                                        |
+| **proxy_not_found**             | 404             | Proxy for that country or that type not found.                        |
+| **workflow_not_found**          | 404             | Workflow not found.                                                   |
+| **too_many_requests**           | 429             | The server is under heavy load, please try again later.               |
+| **prisma_initialization_error** | 503             | Service temporarily unavailable. Please try again later.              |
+| **Service Unavailable**         | 503             | The server is not ready to handle the request.                        |
+| **unknown_error**               | 500             | Something went wrong!                                                 |
+| **Internal Server Error**       | 500             | The server has encountered a situation it doesn't know how to handle. |
