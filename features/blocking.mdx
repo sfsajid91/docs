@@ -12,7 +12,7 @@ To block ads, you need to include the `block_ads` query parameter in your reques
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_ads=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_ads=true'
 ```
 
 <Tip>
@@ -26,7 +26,7 @@ Chat widgets can be distracting and may not be needed for your use case. For exa
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_chat_widgets=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_chat_widgets=true'
 ```
 
 <Tip>
@@ -40,7 +40,7 @@ Cookie banners often appear on websites to comply with privacy regulations. Some
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_cookie_banners=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_cookie_banners=true'
 ```
 
 ## Blocking Resources
@@ -67,7 +67,7 @@ To block resources, you need to include the `block_resources` query parameter in
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_resources=image%2C%20media%2C%20font'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%253A%252F%252Fexample.com%252F&block_resources=image%2C%20media%2C%20font'
 ```
 
 <Tip>

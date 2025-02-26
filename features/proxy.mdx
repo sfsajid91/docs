@@ -10,7 +10,7 @@ To customize the proxy type, use the `proxy_type` query parameter to select bett
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_type=residential'
 ```
 
 ## Proxy country
@@ -25,7 +25,7 @@ Here is a demo:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F&proxy_country=jp'
 ```
 
 The `proxy_country` value is retrieved from the database. Let's say the specified country code does not exist in the database. In that case, the request will fail with an error that shows the proxy is unavailable.

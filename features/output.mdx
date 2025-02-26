@@ -11,7 +11,7 @@ Example request:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=false&url=https%3A%2F%2Fexample.com%2F'
 ```
 
 ```HTML
@@ -37,7 +37,7 @@ Remember, ScrapeAutomate automatically removes unnecessary elements, such as nav
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?url=https%3A%2F%2Fexample.com%2F&api_key=<exampleToken>&markdown=true'
 ```
 
 ```md https://example.com/
@@ -63,7 +63,7 @@ To capture a screenshot of the visible area, include the `screenshot` query para
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot=true'
 ```
 
 ### Full Page Screenshot
@@ -72,7 +72,7 @@ To capture a screenshot of the entire page, set the `screenshot_full_page` param
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&screenshot_full_page=true'
 ```
 
 ## Webhook

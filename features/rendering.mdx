@@ -18,7 +18,7 @@ To enable the Javascript rendering you need to pass `render=true` with the reque
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com'
 ```
 
 ### Features of JavaScript Rendering
@@ -44,7 +44,7 @@ In the following example, we set the window width to 1920 pixels:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_width=1920'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_width=1920'
 ```
 
 ### Setting Window Height
@@ -55,7 +55,7 @@ In this example, we set the window height to 1080 pixels:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080'
 ```
 
 ### Using Both Width & Height Together
@@ -66,7 +66,7 @@ In this example, we set the browser window to 1920x1080:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080&window_width=1920'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&window_height=1080&window_width=1920'
 ```
 
 <Note>
@@ -104,7 +104,7 @@ Here is an example of using instructions in a request:
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&instructions=%5B%7B%22wait%22%3A%22.btn%22%7D%2C%7B%22click%22%3A%22.btn2%22%7D%5D'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com%2F&instructions=%5B%7B%22wait%22%3A%22.btn%22%7D%2C%7B%22click%22%3A%22.btn2%22%7D%5D'
 ```
 
 ### Waiting for a selector

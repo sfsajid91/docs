@@ -34,7 +34,7 @@ After copying the ID, send the workflow id as a query parameter with your api ke
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5'
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&workflow_id=cm1zwux5s000012i655qokya5'
 ```
 
 Keep in mind that if you are using any kind of webhook, you will get the response at the webhook rather then directly getting the response. Instead you might an response saying:
@@ -82,7 +82,7 @@ To get all of a user's workflows you will need to send a `GET` request to this a
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/workflow?api_key=<exampleToken>'
+    --url 'https://app.scrapeautomate.com/api/workflow?api_key=<exampleToken>'
 ```
 
 You should get a response like this:
@@ -116,7 +116,7 @@ Using the workflow id send an GET request to the following URL with your api key
 
 ```shell cURL
 curl --request GET \
-    --url '<EnvValue name="dashboardAPI"/>/workflow/requests/${requestId}/?api_key=<exampleToken>'
+    --url 'https://app.scrapeautomate.com/api/workflow/requests/${requestId}/?api_key=<exampleToken>'
 ```
 
 If everything is correct, In the response you should see an array of requests which were made using that workflow.
@@ -126,7 +126,7 @@ If everything is correct, In the response you should see an array of requests wh
 Creating an api workflow using the api is very simple, to create a workflow send an POST request to following API:
 
 ```
-<EnvValue name="dashboardAPI"/>/workflow/create/?api_key=<exampleApiKey>
+https://app.scrapeautomate.com/api/workflow/create/?api_key=<exampleApiKey>
 ```
 
 In the body you have to send an JSON object which contains the following data:
@@ -177,7 +177,7 @@ Response:
 To archive a workflow you need to set an DELETE request to the following api, with the workflow id you want to archive and your api key for authentication.
 
 ```shell cURL
-curl -X DELETE "<EnvValue name="dashboardAPI"/>/workflow/archive/${workflowId}?api_key=<exampleApiKey>
+curl -X DELETE "https://app.scrapeautomate.com/api/workflow/archive/${workflowId}?api_key=<exampleApiKey>
 ```
 
 After you send the request you will notice that your workflow has been automatically archived. Once a workflow has been archived you will no longer be able to edit or use the workflow. If you would like to revert this you may unacrhive the workflow.
@@ -187,7 +187,7 @@ After you send the request you will notice that your workflow has been automatic
 If you would like to unarchive a workflow you need to send an POST request to the following api, with the workflow id you want to unarchive and your api key.
 
 ```shell cURL
-curl -X POST "<EnvValue name="dashboardAPI"/>/workflow/unarchive/${workflowId}?api_key=<exampleApiKey>"
+curl -X POST "https://app.scrapeautomate.com/api/workflow/unarchive/${workflowId}?api_key=<exampleApiKey>"
 ```
 
 Once you send an request and if everything is successful you will be able to use and edit that workflow again.
