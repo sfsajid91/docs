@@ -429,7 +429,7 @@
         ]
       }
     },
-    "/api/workflow/{_id}": {
+    "/api/workflow/{id}": {
       "get": {
         "summary": "Get a workflow by ID",
         "operationId": "getWorkflowById",
@@ -456,9 +456,7 @@
             "description": "Workflow retrieved successfully"
           }
         }
-      }
-    },
-    "/api/workflow/{id}": {
+      },
       "patch": {
         "summary": "Update an existing workflow",
         "operationId": "updateWorkflow",
